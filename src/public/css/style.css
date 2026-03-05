@@ -1,0 +1,76 @@
+:root {
+  --darkGrayColor: #222;
+  --whiteColor: #fff;
+  --orangeColor: #f6982d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--darkGrayColor);
+  color: var(--whiteColor);
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+#logo img {
+  height: 40px;
+}
+
+#navBar {
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--darkGrayColor);
+  border-bottom: 1px solid var(--orangeColor);
+}
+
+#navBar ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 1rem;
+}
+
+#navBar ul li a {
+  color: var(--whiteColor);
+  transition: all 0.5s ease;
+  font-weight: bold;
+  display: inline-block;
+}
+#navBar ul li a:hover {
+  transform: scale(1.2);
+  color: var(--orangeColor);
+}
+
+.container {
+  flex: 1;
+  padding: 2rem;
+}
+
+footer {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--orangeColor);
+}
+
+footer span {
+  font-weight: bold;
+  color: var(--orangeColor);
+}
