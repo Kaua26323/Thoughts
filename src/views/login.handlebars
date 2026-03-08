@@ -1,1 +1,25 @@
-<h1>pagina de login</h1>
+<div class="authContainer">
+  <h2>Login</h2>
+  <form action="/signin" method="post">
+    <div class="formControl">
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Type your email..."
+      />
+    </div>
+    <div class="formControl">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Type your password..."
+      />
+    </div>
+    <button type="submit" class="submitButton">Sign In</button>
+    <p>Don’t have an account? <a href="/register">Sign up.</a></p>
+  </form>
+</div>

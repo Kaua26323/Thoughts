@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const Tought = require("./models/Tought");
-const { User } = require("./models/UserModel");
+const User = require("./models/UserModel");
 
 app.use(
   session({
