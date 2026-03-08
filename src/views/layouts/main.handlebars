@@ -18,12 +18,27 @@
         </a>
         <ul>
           <li><a href="/">Thoughts</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Register</a></li>
+          {{#if session.user}}
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">LogOut</a></li>
+          {{else}}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          {{/if}}
         </ul>
       </nav>
     </header>
     <div class="container">
+      {{#if errors}}
+        <div class="message-error">
+          {{errors}}
+        </div>
+      {{/if}}
+      {{#if success}}
+        <div class="message-success">
+          {{success}}
+        </div>
+      {{/if}}
       {{{body}}}
     </div>
     <footer>

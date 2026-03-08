@@ -2,6 +2,10 @@
   --darkGrayColor: #222;
   --whiteColor: #fff;
   --orangeColor: #f6982d;
+  --darkRedColor: #9e0000;
+  --redColor: #ff0000;
+  --greenColor: #05f54d;
+  --darkGreenColor: #057226;
 }
 
 * {
@@ -24,6 +28,8 @@ body {
 a {
   text-decoration: none;
 }
+
+/* Header */
 
 #logo img {
   height: 40px;
@@ -57,10 +63,105 @@ a {
   color: var(--orangeColor);
 }
 
+/* Header end */
+
+.message-error {
+  max-width: 60%;
+  padding: 16px;
+  margin: 0 auto 20px;
+  background-color: var(--darkRedColor);
+  border: 1px solid var(--redColor);
+  border-radius: 5px;
+  color: var(--whiteColor);
+  text-align: center;
+}
+
+.message-success {
+  max-width: 60%;
+  padding: 16px;
+  margin: 0 auto 20px;
+  background-color: var(--darkGreenColor);
+  border: 1px solid var(--greenColor);
+  border-radius: 5px;
+  color: var(--whiteColor);
+  text-align: center;
+}
+
 .container {
   flex: 1;
   padding: 2rem;
 }
+
+/* Register and Login */
+
+.authContainer {
+  max-width: 29rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.authContainer h2 {
+  margin-bottom: 1rem;
+  color: var(--whiteColor);
+  border-left: 4px solid var(--orangeColor);
+  padding-left: 8px;
+  font-size: 2rem;
+  width: 100px;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  gap: 1px;
+}
+
+.formControl label {
+  font-weight: bold;
+}
+
+.formControl input,
+.formCotnrol textarea {
+  padding: 7px;
+  border-radius: 3px;
+  border: 1px solid var(--orangeColor);
+  background-color: transparent;
+  color: var(--whiteColor);
+}
+
+form .submitButton {
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--orangeColor);
+  border: 2px solid var(--orangeColor);
+  border-radius: 5px;
+  padding: 10px 30px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+form .submitButton:hover {
+  background-color: var(--orangeColor);
+  color: var(--whiteColor);
+  transform: scale(1.1);
+}
+
+form p {
+  font-weight: bold;
+}
+
+form p a {
+  color: var(--orangeColor);
+  transition: all 0.5s ease;
+}
+form p a:hover {
+  color: #ff8000;
+  border-bottom: 1px solid var(--orangeColor);
+}
+/* Register and Login  end */
 
 footer {
   height: 100px;
