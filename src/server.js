@@ -8,13 +8,14 @@ const FileStore = require("session-file-store")(session);
 const { engine } = require("express-handlebars");
 const { globalMiddleware } = require("./middlewares/globalsMiddlewares");
 
-const homeRoutes = require("./routes/home");
+const homeRoute = require("./routes/home");
 const authRoutes = require("./routes/auth");
+const dashboardRoutes = require("./routes/dashboard");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const Tought = require("./models/Tought");
+const { Thought } = require("./models/ThoughtModel");
 const User = require("./models/UserModel");
 
 app.use(
@@ -49,8 +50,9 @@ app.set("views", path.resolve("src/views"));
 app.use(globalMiddleware);
 
 // Routes
-app.use(homeRoutes);
+app.use(homeRoute);
 app.use(authRoutes);
+app.use(dashboardRoutes);
 
 conn
   .sync()

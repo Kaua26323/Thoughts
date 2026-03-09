@@ -137,7 +137,7 @@ form .submitButton {
   color: var(--orangeColor);
   border: 2px solid var(--orangeColor);
   border-radius: 5px;
-  padding: 10px 30px;
+  padding: 10px 25px;
   margin-bottom: 16px;
   cursor: pointer;
   transition: all 0.5s ease;
@@ -162,6 +162,37 @@ form p a:hover {
   border-bottom: 1px solid var(--orangeColor);
 }
 /* Register and Login  end */
+
+/* Dashboard and  dashboard/create - */
+
+.thoughts-form-container a {
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--orangeColor);
+  border: 1px solid var(--orangeColor);
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: all 0.5s ease;
+}
+
+.thoughts-form-container a:hover {
+  color: var(--whiteColor);
+  background-color: var(--orangeColor);
+}
+
+.thoughts-form-container h1 {
+  border-left: 4px solid var(--orangeColor);
+  padding: 8px;
+  margin: 35px 0;
+}
+
+.thoughts-form-container form {
+  max-width: 30%;
+  margin-top: 16px;
+}
+
+/* Dashboard  end */
 
 footer {
   height: 100px;

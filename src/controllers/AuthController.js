@@ -7,7 +7,8 @@ class AuthController {
   }
 
   async signIn(req, res) {
-    if (!req.body) return;
+    if (!req.body) return res.status(400).send("Bad Request");
+
     try {
       console.log("Sended body:", req.body);
       const login = new LoginModel(req.body);
@@ -49,7 +50,7 @@ class AuthController {
   }
 
   async createUser(req, res) {
-    if (!req.body) return;
+    if (!req.body) return res.status(400).send("Bad Request");
     try {
       console.log("Body enviado:", req.body);
       const newUser = new RegisterModel(req.body);
@@ -57,16 +58,16 @@ class AuthController {
       console.log("Body depois:", newUser.body);
 
       if (newUser.errors.length > 0) {
-        req.flash("error", newUser.errors[0]);
+        req.flash("error", newUser.errors);
         console.log("newUser.errors:", newUser.errors);
         console.log("newUser.errors1:", newUser.errors[0]);
         return res.redirect("/register");
       }
 
       req.session.user = {
-        id: login.user.id,
-        name: login.user.name,
-        email: login.user.email,
+        id: newUser.user.id,
+        name: newUser.user.name,
+        email: newUser.user.email,
       };
 
       console.log("USER!!", req.session.user);
