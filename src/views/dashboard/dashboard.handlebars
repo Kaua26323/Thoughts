@@ -1,7 +1,7 @@
 <div class="dashboard">
   <div class="title-container">
     <h2>Dashboard</h2>
-    <a href="/dashboard/create" class="btn">Create Thought</a>
+    <a href="/dashboard/create" class="submitButton btnPath">Create Thought</a>
   </div>
   <h3>Your Thoughts:</h3>
   <ul>
@@ -9,10 +9,13 @@
       <li>
         <span class="label">{{this.text}}</span>
         <span class="actions">
-          <a href="/dashboard/edit-thought/{{this.id}}" class="btn">Edit</a>
-          <form action="/dashboard/remove-thought" method="POST">
+          <a
+            href="/dashboard/edit-thought/{{this.id}}"
+            class="btn edit"
+          >Edit</a>
+          <form action="/dashboard/remove-thought" method="post">
             <input type="hidden" name="id" value="{{this.id}}" />
-            <button type="submit" class="btn">Delete</button>
+            <button type="submit" class="btn delete">Delete</button>
           </form>
         </span>
       </li>

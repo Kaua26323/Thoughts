@@ -22,4 +22,22 @@ dashboardRoutes.post(
   dashboardController.createThought,
 );
 
+dashboardRoutes.get(
+  "/dashboard/edit-thought/:id",
+  isAuthenticated,
+  dashboardController.getThought,
+);
+
+dashboardRoutes.post(
+  "/dashboard/update-thought",
+  isAuthenticated,
+  dashboardController.updateThought,
+);
+
+dashboardRoutes.post(
+  "/dashboard/remove-thought",
+  isAuthenticated,
+  dashboardController.removeThought,
+);
+
 module.exports = dashboardRoutes;

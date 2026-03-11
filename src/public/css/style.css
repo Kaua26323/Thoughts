@@ -130,23 +130,26 @@ a {
   color: var(--whiteColor);
 }
 
-form .submitButton {
+.submitButton {
   background-color: transparent;
   font-size: 1rem;
   font-weight: bold;
   color: var(--orangeColor);
   border: 2px solid var(--orangeColor);
   border-radius: 5px;
-  padding: 10px 25px;
-  margin-bottom: 16px;
   cursor: pointer;
   transition: all 0.5s ease;
 }
 
-form .submitButton:hover {
+.submitButton:hover {
   background-color: var(--orangeColor);
   color: var(--whiteColor);
   transform: scale(1.1);
+}
+
+form .submitButton {
+  padding: 10px 25px;
+  margin-bottom: 16px;
 }
 
 form p {
@@ -163,7 +166,88 @@ form p a:hover {
 }
 /* Register and Login  end */
 
-/* Dashboard and  dashboard/create - */
+/* DASHBOARD */
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.title-container h2 {
+  font-size: 2rem;
+  border-left: 4px solid var(--orangeColor);
+  padding: 6px 0 6px 10px;
+}
+
+.dashboard h3 {
+  margin-bottom: 20px;
+}
+
+.dashboard ul {
+  list-style: none;
+}
+
+.dashboard li {
+  padding: 12px;
+  border-bottom: 1px solid var(--orangeColor);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard .label {
+  font-weight: bold;
+  color: var(--orangeColor);
+  margin-right: 20px;
+}
+
+.dashboard .actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btnPath {
+  margin: 0;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard .actions .btn {
+  background-color: transparent;
+  border: 1px solid var(--whiteColor);
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--whiteColor);
+  border-radius: 5px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.dashboard .actions .delete:hover {
+  background-color: var(--darkRedColor);
+  color: var(--whiteColor);
+  transform: scale(1.1);
+}
+
+.dashboard .actions .edit:hover {
+  background-color: var(--orangeColor);
+  color: var(--whiteColor);
+  transform: scale(1.1);
+}
+
+.dashboard p a {
+  color: var(--orangeColor);
+  transition: all 0.5s ease;
+}
+.dashboard p a:hover {
+  font-weight: bold;
+}
+/* Dashboard END*/
+
+/* dashboard/create - */
 
 .thoughts-form-container a {
   background-color: transparent;

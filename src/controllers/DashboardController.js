@@ -1,25 +1,18 @@
-const { ThoughtModel } = require("../models/ThoughtModel");
+const ThoughtManager = require("../models/thoughtModels/ThoughtManager");
 
 class DashboardController {
   async dashboard(req, res) {
-    const data = {
-      text: null,
-      userId: req.session.user.id,
-      isPOST: false,
-    };
     try {
-      const thought = new ThoughtModel(data);
-      await thought.getThoughts();
-
-      console.log("My thought:", thought);
-      console.log("inst thought:", thought.thoughts);
+      const userId = req.session.user.id;
+      const thoughts = await ThoughtManager.getAllThoughtsByUserId(userId);
 
       res.render("dashboard/dashboard.handlebars", {
-        thoughts: thought.thoughts,
+        thoughts,
+        emptyThoughts: thoughts.length === 0,
       });
     } catch (err) {
       console.error("Critical Error:", err);
-      req.flash("error", "Unexpected error.");
+      req.flash("error", err.message);
       return res.redirect("/dashboard");
     }
   }
@@ -32,29 +25,93 @@ class DashboardController {
     if (!req.body) return res.status(400).send("Bad Request!");
     try {
       const data = {
-        text: req.body.text,
         userId: req.session.user.id,
-        isPOST: true,
+        text: req.body.text,
       };
+      console.log(data);
+      const newThought = await ThoughtManager.create(data);
+      console.log("New Thought:", newThought);
 
-      const thoughtModel = new ThoughtModel(data);
-      await thoughtModel.register();
-
-      if (thoughtModel.errors.length > 0) {
-        console.log("thoughtModel.errors:", thoughtModel.errors);
-        req.flash("error", thoughtModel.errors);
-        return res.redirect("/dashboard/create");
-      }
-
-      req.flash("success", thoughtModel.success);
-      console.log("thoughtModel.success:", thoughtModel.success);
+      req.flash("success", "Thought was created successfully!");
       req.session.save(() => {
         res.redirect("/dashboard/create");
       });
     } catch (err) {
       console.error("Critical Error:", err);
-      req.flash("error", "Unexpected error.");
+      req.flash("error", err.message);
       return res.redirect("/dashboard/create");
+    }
+  }
+
+  async getThought(req, res) {
+    if (!req.params.id) return res.status(400).send("Bad Request!");
+    try {
+      const thoughtId = req.params.id;
+      const thought = await ThoughtManager.getThoughtById(thoughtId);
+
+      console.log("thought:", thought);
+
+      if (!thought) {
+        req.flash("error", "Thought not found!");
+        return res.redirect("/dashboard");
+      }
+
+      req.flash("success", "Update the thought!");
+      req.session.save(() => {
+        res.render("dashboard/edit.handlebars", {
+          thought: thought,
+        });
+      });
+    } catch (err) {
+      console.error("Critical Error:", err);
+      req.flash("error", err.message);
+      return res.redirect("/dashboard");
+    }
+  }
+
+  async updateThought(req, res) {
+    if (!req.body) return res.status(400).send("Bad Request!");
+
+    try {
+      const data = {
+        thoughtId: req.body.thoughtId,
+        text: req.body.text,
+        userId: req.session.user.id,
+      };
+
+      const n = await ThoughtManager.updateThought(data);
+
+      console.log("Tarefa atualizada com successo:", n);
+      req.flash("success", "Thought was updeted!");
+      req.session.save(() => {
+        res.redirect("/dashboard");
+      });
+    } catch (err) {
+      console.error("Critical Error:", err);
+      req.flash("error", err.message);
+      return res.redirect(`/dashboard/edit/${req.body.thoughtId}`);
+    }
+  }
+
+  async removeThought(req, res) {
+    if (!req.body) return res.status(400).send("Bad Request!");
+    try {
+      const data = {
+        thoughtId: req.body.id,
+        userId: req.session.user.id,
+      };
+
+      const removeThought = await ThoughtManager.remove(data);
+
+      req.flash("success", "Thought was deleted successfully!");
+      console.log("removeThought:", removeThought);
+      req.session.save(() => {
+        res.redirect("/dashboard");
+      });
+    } catch (err) {
+      console.error("Critical Error:", err);
+      req.flash("error", err.message);
+      return res.redirect("/dashboard");
     }
   }
 }

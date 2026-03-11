@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const db = require("../db/conn");
-const User = require("./UserModel");
-const catchErrors = require("../errors/catchError");
+const db = require("../../db/conn");
+const User = require("../UserModel");
+const catchErrors = require("../../errors/catchError");
 
 const Thought = db.define("thoughts", {
   id: {
@@ -31,13 +31,38 @@ Thought.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Thought, { foreignKey: "userId" });
 
 class ThoughtModel {
-  constructor({ text, userId, isPOST }) {
+  constructor({ text, userId, isText, thoughtId }) {
     this.text = text;
     this.errors = [];
     this.success = [];
     this.userId = userId;
-    this.isPOST = isPOST;
+    this.isText = isText;
+    this.thoughtId = thoughtId;
     this.thoughts = [];
+  }
+
+  async removeThoughts() {
+    this.validate();
+
+    if (this.errors.length > 0) return;
+
+    if (!this.thoughtId) {
+      this.errors.push("ThoughtID is invalid, thought not found!");
+      return;
+    }
+    try {
+      const deleted = await Thought.destroy({
+        where: {
+          id: this.thoughtId,
+          userId: this.userId,
+        },
+      });
+
+      console.log("O que foi deletado:", deleted);
+      this.success.push("Thought was deleted with successfully!");
+    } catch (err) {
+      this.errors.push(catchErrors(err));
+    }
   }
 
   async getThoughts() {
@@ -84,9 +109,10 @@ class ThoughtModel {
 
     console.log("this.text", this.text);
     console.log("this.userId", this.userId);
-    console.log("this.isPOST", this.isPOST);
+    console.log("this.isText", this.isText);
+    console.log("this.thoughtId", this.thoughtId);
 
-    if (this.isPOST && typeof this.text !== "string") {
+    if (this.isText && typeof this.text !== "string") {
       this.errors.push("Text is invalid!");
       return;
     }
@@ -99,4 +125,4 @@ class ThoughtModel {
   }
 }
 
-module.exports = { Thought, ThoughtModel };
+module.exports = Thought;

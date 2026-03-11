@@ -15,7 +15,7 @@ const dashboardRoutes = require("./routes/dashboard");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const { Thought } = require("./models/ThoughtModel");
+const Thought = require("./models/thoughtModels/ThoughtModel");
 const User = require("./models/UserModel");
 
 app.use(
@@ -26,6 +26,7 @@ app.use(
     saveUninitialized: false,
     store: new FileStore({
       logFn: function () {},
+      //path: path.resolve(__dirname, "sessions"),
       path: path.join(require("os").tmpdir(), "sessions"),
     }),
     cookie: {

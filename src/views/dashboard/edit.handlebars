@@ -1,0 +1,17 @@
+<div class="thoughts-form-container">
+  <a href="/dashboard">Back</a>
+  <h1>Edit Thought</h1>
+  <form action="/dashboard/update-thought" method="POST">
+    <div class="formControl">
+      <label for="text">Thought:</label>
+      <input
+        type="hidden"
+        name="thoughtId"
+        id="thoughtId"
+        value="{{thought.id}}"
+      />
+      <input type="text" name="text" id="text" value="{{thought.text}}" />
+    </div>
+    <button type="submit" class="submitButton">Upadete Thought</button>
+  </form>
+</div>
